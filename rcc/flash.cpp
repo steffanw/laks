@@ -13,5 +13,12 @@ void flash_init() {
 	
 	while(FLASH.ACR != 0x105);
 	
+	#elif defined(STM32L1)
+
+	//Enable 64-bit access
+	FLASH.ACR = 0x04;	
+	//Enable prefetch
+	FLASH.ACR |= 0x02;
+
 	#endif
 }

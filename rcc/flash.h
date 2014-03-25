@@ -23,6 +23,9 @@ struct FLASH_t {
 static FLASH_t& FLASH = *(FLASH_t*)0x40022000;
 #elif defined(STM32F4)
 static FLASH_t& FLASH = *(FLASH_t*)0x40023c00;
+#elif defined(STM32L1)
+static FLASH_t& FLASH = *(FLASH_t*)0x40023c00;
+	
 #endif
 
 void flash_init();

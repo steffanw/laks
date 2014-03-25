@@ -81,6 +81,16 @@ def select_stm32(env, variant):
 			'g': 'stm32_f4_g.ld',
 		}[flash]
 	
+	elif family in('l151','l152'):
+		select_arm(env, 'cortex-m3')
+		env.Append(CPPDEFINES = ['STM32L1'])
+		
+		env['LINK_SCRIPT'] = {
+			'6': 'stm32_l15x_6.ld',
+			'8': 'stm32_l15x_8.ld',
+			'b': 'stm32_l15x_b.ld',
+		}[flash]
+
 	else:
 		print 'Unknown stm32 family: %s' % family
 		Exit(1)

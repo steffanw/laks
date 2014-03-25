@@ -64,6 +64,21 @@ struct RCC_t {
 	volatile uint32_t _2;
 	volatile uint32_t SSCGR;
 	volatile uint32_t PLLI2SCFGR;
+	#elif defined(STM32L1)
+	volatile uint32_t CR;
+	volatile uint32_t ICSCR;
+	volatile uint32_t CFGR;
+	volatile uint32_t CIR;
+	volatile uint32_t AHBRSTR;
+	volatile uint32_t APB2RSTR;
+	volatile uint32_t APB1RSTR;
+	volatile uint32_t AHBENR;
+	volatile uint32_t APB2ENR;
+	volatile uint32_t APB1ENR;
+	volatile uint32_t AHBLPENR;
+	volatile uint32_t APB2LPENR;
+	volatile uint32_t APB1LPENR;
+	volatile uint32_t CSR;
 	#endif
 	
 	#if defined(STM32F1)
@@ -245,9 +260,81 @@ struct RCC_t {
 		TIM10  = 1 << 17,
 		TIM11  = 1 << 18,
 	};
+	#elif defined(STM32L1)
+
+
+	/*
+		volatile uint32_t CR;
+	volatile uint32_t ICSCR;
+	volatile uint32_t CFGR;
+	volatile uint32_t CIR;
+	volatile uint32_t AHBRSTR;
+	volatile uint32_t APB2RSTR;
+	volatile uint32_t APB1RSTR;
+	volatile uint32_t AHBENR;
+	volatile uint32_t APB2ENR;
+	volatile uint32_t APB1ENR;
+	volatile uint32_t AHBLPENR;
+	volatile uint32_t APB2LPENR;
+	volatile uint32_t APB1LPENR;
+	volatile uint32_t CSR;
+	 */
+
+	enum AHB_dev {
+	   FSMC     = (1 << 30),
+	   AES      = (1 << 27),
+	   DMA2     = (1 << 25),
+	   DMA1     = (1 << 24),
+	   FLITF    = (1 << 15),
+	   CRC      = (1 << 12),
+	   GPIOG    = (1 << 7),
+	   GPIOF    = (1 << 6),
+	   GPIOH    = (1 << 5),
+	   GPIOE    = (1 << 4),
+	   GPIOD    = (1 << 3),
+	   GPIOC    = (1 << 2),
+	   GPIOB    = (1 << 1),
+	   GPIOA    = (1 << 0),
+	};
+
+	enum APB2_dev {
+	   USART1   = (1 << 14),
+	   SPI1     = (1 << 12),
+	   SDIO     = (1 << 11),
+	   ADC1     = (1 << 9),
+	   TIM11    = (1 << 4),
+	   TIM10    = (1 << 3),
+	   TIM9     = (1 << 2),
+	   SYSCFG   = (1 << 0),
+	};
+
+	enum APB1_dev {
+	   COMP     = (1 << 31),
+	   DAC      = (1 << 29),
+	   PWR      = (1 << 28),
+	   USB      = (1 << 23),
+	   I2C2     = (1 << 22),
+	   I2C1     = (1 << 21),
+	   UART5    = (1 << 20),
+	   UART4    = (1 << 19),
+	   USART3   = (1 << 18),
+	   USART2   = (1 << 17),
+	   SPI3     = (1 << 15),
+	   SPI2     = (1 << 14),
+	   WWDG     = (1 << 11),
+	   LCD      = (1 << 9),
+	   TIM7     = (1 << 5),
+	   TIM6     = (1 << 4),
+	   TIM5     = (1 << 3),
+	   TIM4     = (1 << 2),
+	   TIM3     = (1 << 1),
+	   TIM2     = (1 << 0),
+	};
+
+
 	#endif
 	
-	#if defined(STM32F1) || defined(STM32F3)
+	#if defined(STM32F1) || defined(STM32F3) || defined(STM32L1)
 	inline void enable(AHB_dev dev) {
 		AHBENR |= dev;
 	}
@@ -275,7 +362,7 @@ struct RCC_t {
 
 #if defined(STM32F1) || defined(STM32F3)
 static RCC_t& RCC = *(RCC_t*)0x40021000;
-#elif defined(STM32F4)
+#elif defined(STM32F4) || defined(STM32L1)
 static RCC_t& RCC = *(RCC_t*)0x40023800;
 #endif
 

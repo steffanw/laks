@@ -16,6 +16,9 @@ struct SPI_reg_t {
 };
 
 class SPI_t {
+
+
+
 	public:
 		SPI_reg_t& reg;
 		
@@ -41,6 +44,10 @@ static SPI_t SPI1(0x40013000);
 static SPI_t SPI2(0x40003800);
 static SPI_t SPI3(0x40003c00);
 #elif defined(STM32F4)
+static SPI_t SPI1(0x40013000);
+static SPI_t SPI2(0x40003800);
+static SPI_t SPI3(0x40003c00);
+#elif defined(STM32L1)
 static SPI_t SPI1(0x40013000);
 static SPI_t SPI2(0x40003800);
 static SPI_t SPI3(0x40003c00);
