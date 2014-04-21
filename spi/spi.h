@@ -1,6 +1,8 @@
 #ifndef SPI_H
 #define SPI_H
 
+#include <stdio.h>
+
 #include <os/thread.h>
 
 struct SPI_reg_t {
@@ -21,14 +23,16 @@ class SPI_t {
 
 	public:
 		SPI_reg_t& reg;
-		
+
 		SPI_t(uint32_t reg_addr) : reg(*(SPI_reg_t*)reg_addr) {}
-		
+
 		uint8_t transfer_byte(uint8_t out = 0) {
 			reg.DR = out;
+
+			//printf("%x\r\n", out);
 			
 			while(!(reg.SR & 0x01)) {
-				Thread::yield();
+				//Thread::yield();
 			}
 			
 			return reg.DR;

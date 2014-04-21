@@ -77,7 +77,7 @@ class GPIO_t {
 					} else {
 						g.reg.CRH = (g.reg.CRH & ~(0xf << (n * 4 - 32))) | m << (n * 4 - 32);
 					}
-					#elif defined(STM32F3) || defined(STM32F4)
+					#elif defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 					g.reg.MODER = (g.reg.MODER & ~(3 << (n * 2))) | m << (n * 2);
 					#endif
 				}
@@ -85,7 +85,7 @@ class GPIO_t {
 				void set_type(Type t) {
 					#if defined(STM32F1)
 					// TODO: Unified configure() method?
-					#elif defined(STM32F3) || defined(STM32F4)
+					#elif defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 					if(t) {
 						g.reg.OTYPER |= 1 << n;
 					} else {
@@ -97,13 +97,13 @@ class GPIO_t {
 				void set_pull(Pull p) {
 					#if defined(STM32F1)
 					// TODO: Unified configure() method?
-					#elif defined(STM32F3) || defined(STM32F4)
+					#elif defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 					g.reg.PUPDR = (g.reg.PUPDR & ~(3 << (n * 2))) | p << (n * 2);
 					#endif
 				}
 				
 				void set_af(int af) {
-					#if defined(STM32F3) || defined(STM32F4)
+					#if defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 					if(n < 8) {
 						g.reg.AFRL = (g.reg.AFRL & ~(0xf << (n * 4))) | af << (n * 4);
 					} else {
@@ -113,7 +113,7 @@ class GPIO_t {
 				}
 				
 				void set_speed(Speed s) {
-					#if defined(STM32F3) || defined(STM32F4)
+					#if defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 					g.reg.OSPEEDR = (g.reg.OSPEEDR & ~(3 << (n * 2))) | s << (n * 2);
 					#endif
 				}
@@ -160,7 +160,7 @@ class GPIO_t {
 			public:
 				constexpr PinArray(const GPIO_t& gpio, int first, int last) : g(gpio), f(first), l(last) {}
 				
-				#if defined(STM32F3) || defined(STM32F4)
+				#if defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
 				void set_mode(Pin::Mode m) {
 					g.reg.MODER = (g.reg.MODER & ~mask2()) | ((0x55555555 * m) & mask2());
 				}

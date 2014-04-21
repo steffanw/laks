@@ -22,9 +22,9 @@ struct FLASH_t {
 #if defined(STM32F1) || defined(STM32F3)
 static FLASH_t& FLASH = *(FLASH_t*)0x40022000;
 #elif defined(STM32F4)
-static FLASH_t& FLASH = *(FLASH_t*)0x40023c00;
+static FLASH_t& FLASH = *(FLASH_t*)0x40023C00;
 #elif defined(STM32L1)
-static FLASH_t& FLASH = *(FLASH_t*)0x40023c00;
+static FLASH_t& FLASH = *(FLASH_t*)0x40023C00;
 	
 #endif
 

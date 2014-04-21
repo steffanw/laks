@@ -1,3 +1,5 @@
+import gdb
+
 class RBlog(gdb.Command):
 	def __init__(self):
 		gdb.Command.__init__(self, "rblog", gdb.COMMAND_DATA, gdb.COMPLETE_SYMBOL, True)

@@ -76,3 +76,6 @@ SECTIONS {
 		PROVIDE(_bss_end = .);
 	} > ram    
 }
+
+PROVIDE(end = .);
+_end            = .;

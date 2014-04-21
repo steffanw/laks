@@ -42,6 +42,18 @@ static TIM_t& TIM5 = *(TIM_t*)0x40000c00;
 static TIM_t& TIM6 = *(TIM_t*)0x40001000;
 static TIM_t& TIM7 = *(TIM_t*)0x40001400;
 static TIM_t& TIM8 = *(TIM_t*)0x40010400;
+#elif defined(STM32L1)
+static TIM_t& TIM2 = *(TIM_t*)0x40000000;
+static TIM_t& TIM3 = *(TIM_t*)0x40000400;
+static TIM_t& TIM4 = *(TIM_t*)0x40000800;
+static TIM_t& TIM5 = *(TIM_t*)0x40000c00;
+static TIM_t& TIM6 = *(TIM_t*)0x40001000;
+static TIM_t& TIM7 = *(TIM_t*)0x40001400;
+static TIM_t& TIM9 = *(TIM_t*)0x40010800;
+static TIM_t& TIM10 = *(TIM_t*)0x40010c00;
+static TIM_t& TIM11 = *(TIM_t*)0x40011000;
 #endif
+
+
 
 #endif
