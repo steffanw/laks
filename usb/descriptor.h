@@ -19,7 +19,7 @@ constexpr auto pack(A a, R... r) -> X<A, decltype(pack(r...))> {
 	return {a, pack(r...)};
 }
 
-struct Device_desc {1
+struct Device_desc {
 	uint8_t bLength;
 	uint8_t bDescriptorType;
 	uint16_t bcdUSB;

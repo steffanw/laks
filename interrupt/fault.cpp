@@ -12,7 +12,13 @@ inline void __attribute__((naked)) switch_context() {
 	asm volatile ("str sp, [%0]" :: "r" (&Thread::active_thread->sp));
 	
 	// Update running thread.
-	Thread::active_thread = Thread::active_thread->next;
+	if(!Thread::reschedule()) {
+		// No threads are ready - set SLEEPONEXIT.
+		SCB.SCR = 1 << 1;
+	} else {
+		// Clear SLEEPONEXIT.
+		SCB.SCR = 0 << 1;
+	}
 	
 	// Fetch stack pointer for new thread.
 	asm volatile ("ldr sp, [%0]" :: "r" (&Thread::active_thread->sp));

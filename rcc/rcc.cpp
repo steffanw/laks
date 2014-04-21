@@ -1,3 +1,5 @@
+#if defined(STM32F1) || defined(STM32F3) || defined(STM32F4) || defined(STM32L1)
+
 #include "rcc.h"
 #include "flash.h"
 
@@ -49,3 +51,5 @@ void rcc_init() {
 	
 	#endif
 }
+
+#endif
